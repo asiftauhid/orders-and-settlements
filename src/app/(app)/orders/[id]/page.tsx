@@ -48,9 +48,15 @@ export default async function OrderDetailPage(props: PageProps<"/orders/[id]">) 
         <StatusBadge status={serialized.status} />
       </div>
 
-      <div className="mb-8 grid grid-cols-3 gap-4 rounded-lg border border-zinc-200 p-4 text-center dark:border-zinc-800">
+      <div className="mb-8 grid grid-cols-2 gap-4 rounded-lg border border-zinc-200 p-4 text-center sm:grid-cols-4 dark:border-zinc-800">
         <div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Total</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Subtotal</p>
+          <p className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+            {formatCents(serialized.subtotalCents)}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Order total</p>
           <p className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
             {formatCents(serialized.totalCents)}
           </p>

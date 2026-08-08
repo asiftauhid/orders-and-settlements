@@ -39,6 +39,33 @@ function buildQueryString(filters: Filters, extra?: Record<string, string>): str
   return params.toString();
 }
 
+function filtersAreDefault(filters: Filters): boolean {
+  return (Object.keys(EMPTY_FILTERS) as (keyof Filters)[]).every(
+    (key) => filters[key] === EMPTY_FILTERS[key],
+  );
+}
+
+function ResetIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+      <path d="M21 3v5h-5" />
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+      <path d="M3 21v-5h5" />
+    </svg>
+  );
+}
+
 export function ExportPanel() {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [preview, setPreview] = useState<{ headers: string[]; rows: string[][] } | null>(
@@ -51,6 +78,14 @@ export function ExportPanel() {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setPreview(null);
   }
+
+  function handleReset() {
+    setFilters(EMPTY_FILTERS);
+    setPreview(null);
+    setError(null);
+  }
+
+  const isDefault = filtersAreDefault(filters);
 
   async function handlePreview() {
     setIsLoading(true);
@@ -130,6 +165,16 @@ export function ExportPanel() {
       </div>
 
       <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleReset}
+          disabled={isDefault}
+          title="Reset filters"
+          aria-label="Reset filters"
+          className="rounded-md border border-zinc-300 p-2 text-zinc-700 hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:disabled:hover:bg-transparent"
+        >
+          <ResetIcon className="h-4 w-4" />
+        </button>
         <button
           type="button"
           onClick={handlePreview}

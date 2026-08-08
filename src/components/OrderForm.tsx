@@ -186,13 +186,19 @@ export function OrderForm({ initialValues, submitLabel, onSubmit }: OrderFormPro
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-zinc-200 pt-4 dark:border-zinc-800">
-        <span className="text-sm text-zinc-600 dark:text-zinc-400">
-          Order total
-        </span>
-        <span className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-          {formatCents(previewTotals.totalCents)}
-        </span>
+      <div className="flex flex-col gap-2 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-zinc-600 dark:text-zinc-400">Subtotal</span>
+          <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+            {formatCents(previewTotals.subtotalCents)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-zinc-600 dark:text-zinc-400">Order total</span>
+          <span className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+            {formatCents(previewTotals.totalCents)}
+          </span>
+        </div>
       </div>
 
       {error && (
