@@ -21,7 +21,9 @@ export function RecordPaymentForm({
   const canPay = amountDueCents > 0;
   const canRefund = amountPaidCents > 0;
 
-  const [type, setType] = useState<EntryType>(canPay ? "payment" : "refund");
+  const [selectedType, setSelectedType] = useState<EntryType>(
+    canPay ? "payment" : "refund",
+  );
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [note, setNote] = useState("");
@@ -32,6 +34,14 @@ export function RecordPaymentForm({
     // Nothing left to do: fully paid, and nothing paid yet to refund.
     return null;
   }
+
+  // `selectedType` is only meaningful while both options are available —
+  // once a full payment or refund removes one option (e.g. amountDueCents
+  // drops to 0 after router.refresh()), it's forced to whichever option
+  // is still valid instead of trusting stale state left over from before
+  // the props changed (useState's initializer only runs once, on mount).
+  const type: EntryType =
+    canPay && canRefund ? selectedType : canPay ? "payment" : "refund";
 
   const maxCents = type === "payment" ? amountDueCents : amountPaidCents;
 
@@ -82,7 +92,7 @@ export function RecordPaymentForm({
           <div className="flex overflow-hidden rounded-md border border-zinc-300 text-xs dark:border-zinc-700">
             <button
               type="button"
-              onClick={() => setType("payment")}
+              onClick={() => setSelectedType("payment")}
               className={`px-2.5 py-1 font-medium ${
                 type === "payment"
                   ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
@@ -93,7 +103,7 @@ export function RecordPaymentForm({
             </button>
             <button
               type="button"
-              onClick={() => setType("refund")}
+              onClick={() => setSelectedType("refund")}
               className={`px-2.5 py-1 font-medium ${
                 type === "refund"
                   ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
