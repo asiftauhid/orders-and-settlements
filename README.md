@@ -27,7 +27,7 @@ A small full-stack web application for users to create orders with line items, r
 
 | Timestamp | Section                                      |
 | --------- | -------------------------------------------- |
-| 0:00      | Tech stack, File System, and README overview |
+| 0:00      | Tech Stack, File System, and README overview |
 | 3:50      | REST API and Postman Demo                    |
 | 5:35      | Unit Testing                                 |
 | 6:15      | Live Application Demo                        |
@@ -163,7 +163,7 @@ already changed hands.
 
 <!-- ## Stretch goals -->
 
-**Audit log**: Every status change gets a timestamped entry in
+**Audit log/Status History**: Every status change gets a timestamped entry in
 `statusHistory`. Most transitions happen when something is written (eg. payment/refund), but going from `pending` to `overdue` happens purely
 because time passed, with no write attached to it. And that one gets updated the next time the order is loaded (based on the exact due date), rather than through a background job.
 
