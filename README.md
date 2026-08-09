@@ -2,12 +2,13 @@
 
 A small full-stack web application for users to create orders with line items, recording payments and refunds against them, and tracking what's owed and their status through the dashboard.
 
-[Live Demo ->](https://orders-and-settlements-five.vercel.app/)
+[Live Demo →](https://orders-and-settlements-five.vercel.app/)
 
 ---
 
 ### Contents
 
+- [Walkthrough video](#walkthrough-video)
 - [Tech stack](#tech-stack)
 - [Getting started](#getting-started)
 - [Data model](#data-model)
@@ -19,6 +20,17 @@ A small full-stack web application for users to create orders with line items, r
 - [Assumptions and tradeoffs](#assumptions-and-tradeoffs)
 - [What I'd change for production](#what-id-change-for-production)
 - [Deployed URL](#deployed-url)
+
+## Walkthrough video
+
+[Watch the Full walkthrough Video (Google Drive) →](https://drive.google.com/file/d/1O2IfymrHphSXqpwt2zrIOxPZoTibdeCl/view?usp=sharing)
+
+| Timestamp | Section                                      |
+| --------- | -------------------------------------------- |
+| 0:00      | Tech stack, File System, and README overview |
+| 3:50      | REST API and Postman Demo                    |
+| 5:35      | Unit Testing                                 |
+| 6:15      | Live Application Demo                        |
 
 ---
 
